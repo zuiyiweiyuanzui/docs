@@ -20,24 +20,29 @@ module.exports = {
         ['meta', { name: 'msapplication-TileColor', content: '#000000' }]
     ],
 
-    plugins: [
-        [
-          '@vuepress/last-updated', {
-            transformer: (timestamp) =>{
-              return moment(timestamp).format("LLLL")
-            }
-          }
-        ],
-        [
-          '@vuepress/pwa', {
-                    serviceWorker: true,
-                    updatePopup: {
-                    message: "发现新内容可用",
-                    buttonText: "刷新"
-                  }
-                }
-        ]
-    ],
+    plugins: {
+      '@vuepress/last-updated': {
+        transformer: (timestamp) =>moment(timestamp).format("LLLL")
+      },
+      '@vuepress/pwa': {
+        serviceWorker: true,
+          updatePopup: {
+          message: "发现新内容可用",
+          buttonText: "刷新"
+        } 
+      },
+      '@vssue/vuepress-plugin-vssue': {
+        // 设置 `platform` 而不是 `api`
+        platform: 'github-v4',
+  
+        // 其他的 Vssue 配置
+        owner: 'zuiyiweiyuanzui',
+        repo: 'docs',
+        clientId: 'c9951b6b468dc66ca031',
+        clientSecret: 'e6cd99306df7d8e58f1515937d14c2623512a5e5',
+        autoCreateIssue: true
+      } 
+    },
     themeConfig: {
       lastUpdated: '更新时间',
       logo: '/assets/img/hero.png',
